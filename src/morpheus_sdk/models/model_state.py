@@ -6,7 +6,7 @@ class ModelStateInputs(BaseModel):
     time_start: Optional[datetime] = None
     time_end: Optional[datetime] = None
     include: Optional[Dict[str, bool]] = {
-        "change_log": False,
+        "audit_log": False,
         "logs": True,
     }
     limit: Optional[int] = None

@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -7,6 +7,10 @@ from attrs import field as _attrs_field
 from ..models.create_ticket_body_priority import CreateTicketBodyPriority
 from ..models.create_ticket_body_type import CreateTicketBodyType
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.create_ticket_body_metadata import CreateTicketBodyMetadata
+
 
 T = TypeVar("T", bound="CreateTicketBody")
 
@@ -22,6 +26,7 @@ class CreateTicketBody:
         type_ (Union[Unset, CreateTicketBodyType]):  Default: CreateTicketBodyType.INCIDENT. Example: incident.
         priority (Union[Unset, CreateTicketBodyPriority]):  Default: CreateTicketBodyPriority.MEDIUM. Example: high.
         category (Union[Unset, str]):  Example: Database.
+        metadata (Union[Unset, CreateTicketBodyMetadata]): Additional context and system metadata
     """
 
     title: str
@@ -30,6 +35,7 @@ class CreateTicketBody:
     type_: Union[Unset, CreateTicketBodyType] = CreateTicketBodyType.INCIDENT
     priority: Union[Unset, CreateTicketBodyPriority] = CreateTicketBodyPriority.MEDIUM
     category: Union[Unset, str] = UNSET
+    metadata: Union[Unset, "CreateTicketBodyMetadata"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -49,6 +55,10 @@ class CreateTicketBody:
 
         category = self.category
 
+        metadata: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.metadata, Unset):
+            metadata = self.metadata.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -64,11 +74,15 @@ class CreateTicketBody:
             field_dict["priority"] = priority
         if category is not UNSET:
             field_dict["category"] = category
+        if metadata is not UNSET:
+            field_dict["metadata"] = metadata
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.create_ticket_body_metadata import CreateTicketBodyMetadata
+
         d = dict(src_dict)
         title = d.pop("title")
 
@@ -92,6 +106,13 @@ class CreateTicketBody:
 
         category = d.pop("category", UNSET)
 
+        _metadata = d.pop("metadata", UNSET)
+        metadata: Union[Unset, CreateTicketBodyMetadata]
+        if isinstance(_metadata, Unset):
+            metadata = UNSET
+        else:
+            metadata = CreateTicketBodyMetadata.from_dict(_metadata)
+
         create_ticket_body = cls(
             title=title,
             description=description,
@@ -99,6 +120,7 @@ class CreateTicketBody:
             type_=type_,
             priority=priority,
             category=category,
+            metadata=metadata,
         )
 
         create_ticket_body.additional_properties = d

@@ -172,6 +172,8 @@ from .create_od_response_207 import CreateODResponse207
 from .create_od_response_207_data import CreateODResponse207Data
 from .create_od_response_207_data_od import CreateODResponse207DataOd
 from .create_ticket_body import CreateTicketBody
+from .create_ticket_body_metadata import CreateTicketBodyMetadata
+from .create_ticket_body_metadata_context_snapshots_item import CreateTicketBodyMetadataContextSnapshotsItem
 from .create_ticket_body_priority import CreateTicketBodyPriority
 from .create_ticket_body_type import CreateTicketBodyType
 from .create_ticket_response_201 import CreateTicketResponse201
@@ -481,6 +483,7 @@ from .get_all_wms_distribution_centers_response_200 import GetAllWMSDistribution
 from .get_all_wms_receiving_transactions_response_200 import GetAllWMSReceivingTransactionsResponse200
 from .get_all_wms_receiving_transactions_response_200_data import GetAllWMSReceivingTransactionsResponse200Data
 from .get_all_wms_receiving_transactions_status_item import GetAllWMSReceivingTransactionsStatusItem
+from .get_audit_logs_model import GetAuditLogsModel
 from .get_audit_logs_response_200 import GetAuditLogsResponse200
 from .get_audit_logs_response_200_meta import GetAuditLogsResponse200Meta
 from .get_available_wms_bins_bin_type_item import GetAvailableWMSBinsBinTypeItem
@@ -969,6 +972,8 @@ from .invariant_check_result_expected_type_0 import InvariantCheckResultExpected
 from .itsm_ticket import ItsmTicket
 from .itsm_ticket_attachments_item import ItsmTicketAttachmentsItem
 from .itsm_ticket_impact import ItsmTicketImpact
+from .itsm_ticket_metadata import ItsmTicketMetadata
+from .itsm_ticket_metadata_context_snapshots_item import ItsmTicketMetadataContextSnapshotsItem
 from .itsm_ticket_priority import ItsmTicketPriority
 from .itsm_ticket_status import ItsmTicketStatus
 from .itsm_ticket_type import ItsmTicketType
@@ -1298,6 +1303,7 @@ from .verification_result import VerificationResult
 from .verification_result_failure_details_type_0 import VerificationResultFailureDetailsType0
 from .verify_entity_body import VerifyEntityBody
 from .verify_entity_body_entity_type import VerifyEntityBodyEntityType
+from .verify_entity_body_metadata import VerifyEntityBodyMetadata
 from .verify_entity_response_400 import VerifyEntityResponse400
 from .verify_entity_response_500 import VerifyEntityResponse500
 from .verify_ticket_body import VerifyTicketBody
@@ -1633,6 +1639,8 @@ __all__ = (
     "CreateODResponse207Data",
     "CreateODResponse207DataOd",
     "CreateTicketBody",
+    "CreateTicketBodyMetadata",
+    "CreateTicketBodyMetadataContextSnapshotsItem",
     "CreateTicketBodyPriority",
     "CreateTicketBodyType",
     "CreateTicketResponse201",
@@ -1924,6 +1932,7 @@ __all__ = (
     "GetAllWMSReceivingTransactionsResponse200",
     "GetAllWMSReceivingTransactionsResponse200Data",
     "GetAllWMSReceivingTransactionsStatusItem",
+    "GetAuditLogsModel",
     "GetAuditLogsResponse200",
     "GetAuditLogsResponse200Meta",
     "GetAvailableWMSBinsBinTypeItem",
@@ -2286,6 +2295,8 @@ __all__ = (
     "ItsmTicket",
     "ItsmTicketAttachmentsItem",
     "ItsmTicketImpact",
+    "ItsmTicketMetadata",
+    "ItsmTicketMetadataContextSnapshotsItem",
     "ItsmTicketPriority",
     "ItsmTicketStatus",
     "ItsmTicketType",
@@ -2615,6 +2626,7 @@ __all__ = (
     "VerificationResultFailureDetailsType0",
     "VerifyEntityBody",
     "VerifyEntityBodyEntityType",
+    "VerifyEntityBodyMetadata",
     "VerifyEntityResponse400",
     "VerifyEntityResponse500",
     "VerifyTicketBody",

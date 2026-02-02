@@ -2,14 +2,18 @@ from enum import Enum
 
 
 class GetLogsServiceType(str, Enum):
-    AS2 = "as2"
+    CAPABILITY = "capability"
     EDI = "edi"
     ERP = "erp"
-    GATEWAY = "gateway"
-    INFRA = "infra"
-    OTHER = "other"
-    TRANSLATOR = "translator"
-    VALIDATOR = "validator"
+    FINANCE = "finance"
+    KNOWLEDGE_GRAPH = "knowledge-graph"
+    MANUFACTURING = "manufacturing"
+    OD = "od"
+    PERSONA = "persona"
+    TICKETS = "tickets"
+    TMS = "tms"
+    WMS = "wms"
+    WORLD = "world"
 
     def __str__(self) -> str:
         return str(self.value)

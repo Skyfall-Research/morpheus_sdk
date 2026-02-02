@@ -85,9 +85,9 @@ def sync_detailed(
 
     #### Parameters Guide
 
-    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`).
+    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`, `audit`, `capability`).
     - **action** (Sub-Service): The specific functional area or resource within the service.
-        - Example: In `wms`, actions include `inbound-order`, `inventory`, `waves`.
+        - Example: In `wms`, actions include `inbound-order`, `inventory`, `cycle-count`.
         - Leave empty to see all actions for a service.
     - **method**: Filter by HTTP method to find specific operations (e.g., `post` for creation).
 
@@ -152,9 +152,9 @@ def sync(
 
     #### Parameters Guide
 
-    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`).
+    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`, `audit`, `capability`).
     - **action** (Sub-Service): The specific functional area or resource within the service.
-        - Example: In `wms`, actions include `inbound-order`, `inventory`, `waves`.
+        - Example: In `wms`, actions include `inbound-order`, `inventory`, `cycle-count`.
         - Leave empty to see all actions for a service.
     - **method**: Filter by HTTP method to find specific operations (e.g., `post` for creation).
 
@@ -214,9 +214,9 @@ async def asyncio_detailed(
 
     #### Parameters Guide
 
-    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`).
+    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`, `audit`, `capability`).
     - **action** (Sub-Service): The specific functional area or resource within the service.
-        - Example: In `wms`, actions include `inbound-order`, `inventory`, `waves`.
+        - Example: In `wms`, actions include `inbound-order`, `inventory`, `cycle-count`.
         - Leave empty to see all actions for a service.
     - **method**: Filter by HTTP method to find specific operations (e.g., `post` for creation).
 
@@ -279,9 +279,9 @@ async def asyncio(
 
     #### Parameters Guide
 
-    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`).
+    - **service**: The top-level domain (e.g., `wms`, `tms`, `erp`, `audit`, `capability`).
     - **action** (Sub-Service): The specific functional area or resource within the service.
-        - Example: In `wms`, actions include `inbound-order`, `inventory`, `waves`.
+        - Example: In `wms`, actions include `inbound-order`, `inventory`, `cycle-count`.
         - Leave empty to see all actions for a service.
     - **method**: Filter by HTTP method to find specific operations (e.g., `post` for creation).
 

@@ -15,6 +15,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.itsm_ticket_attachments_item import ItsmTicketAttachmentsItem
+    from ..models.itsm_ticket_metadata import ItsmTicketMetadata
     from ..models.itsm_ticket_world_ref import ItsmTicketWorldRef
     from ..models.work_note import WorkNote
 
@@ -46,6 +47,7 @@ class ItsmTicket:
         resolution_notes (Union[None, Unset, str]): Notes describing how the ticket was resolved Example: Cleared disk
             space on mail server. Service restored at 11:45 AM..
         work_notes (Union[Unset, list['WorkNote']]): Array of work notes documenting progress and actions
+        metadata (Union[Unset, ItsmTicketMetadata]): Additional context and system metadata
     """
 
     field_id: str
@@ -65,6 +67,7 @@ class ItsmTicket:
     attachments: Union[Unset, list["ItsmTicketAttachmentsItem"]] = UNSET
     resolution_notes: Union[None, Unset, str] = UNSET
     work_notes: Union[Unset, list["WorkNote"]] = UNSET
+    metadata: Union[Unset, "ItsmTicketMetadata"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -124,6 +127,10 @@ class ItsmTicket:
                 work_notes_item = work_notes_item_data.to_dict()
                 work_notes.append(work_notes_item)
 
+        metadata: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.metadata, Unset):
+            metadata = self.metadata.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -152,12 +159,15 @@ class ItsmTicket:
             field_dict["resolutionNotes"] = resolution_notes
         if work_notes is not UNSET:
             field_dict["workNotes"] = work_notes
+        if metadata is not UNSET:
+            field_dict["metadata"] = metadata
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.itsm_ticket_attachments_item import ItsmTicketAttachmentsItem
+        from ..models.itsm_ticket_metadata import ItsmTicketMetadata
         from ..models.itsm_ticket_world_ref import ItsmTicketWorldRef
         from ..models.work_note import WorkNote
 
@@ -227,6 +237,13 @@ class ItsmTicket:
 
             work_notes.append(work_notes_item)
 
+        _metadata = d.pop("metadata", UNSET)
+        metadata: Union[Unset, ItsmTicketMetadata]
+        if isinstance(_metadata, Unset):
+            metadata = UNSET
+        else:
+            metadata = ItsmTicketMetadata.from_dict(_metadata)
+
         itsm_ticket = cls(
             field_id=field_id,
             world_ref=world_ref,
@@ -245,6 +262,7 @@ class ItsmTicket:
             attachments=attachments,
             resolution_notes=resolution_notes,
             work_notes=work_notes,
+            metadata=metadata,
         )
 
         itsm_ticket.additional_properties = d

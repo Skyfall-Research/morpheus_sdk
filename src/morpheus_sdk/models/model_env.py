@@ -7,7 +7,11 @@ class ModelCreateEnvInputs(BaseModel):
     layout: Optional[str] = None
     realHoursPerSimDay: Optional[int] = 24
 
-class ModelEnvActions(BaseModel):
-    act: Dict[str, Any]
+class ModelDeleteEnvInputs(BaseModel):
+    world_id: str
 
-    
+
+class ModelEnvOutput(BaseModel):
+    status: Optional[int] = None
+    data: Optional[Dict[str, Any]] = None
+    error: Optional[str] = None
