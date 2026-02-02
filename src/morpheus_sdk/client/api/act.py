@@ -16,49 +16,37 @@ class Act:
         self, 
         path: str, 
         method: str = "GET", 
-        params: Optional[Dict[str, Any]] = None, 
-        query: Optional[Dict[str, Any]] = None, 
+        query_params: Optional[Dict[str, Any]] = None, 
+        path_params: Optional[Dict[str, Any]] = None, 
         body: Optional[Dict[str, Any]] = None
     ) -> Union[ActResponse200, Any]:
         """
         Execute a dynamic internal API call.
         """
         # Construct ActBody parts
-        act_params = None
-        if params is not None:
-            act_params = ActBodyParams.from_dict(params)
+        act_params_obj = None
+        if path_params is not None:
+            act_params_obj = ActBodyParams.from_dict(path_params)
 
-        act_query = None
-        if query is not None:
-            act_query = ActBodyQuery.from_dict(query)
+        act_query_obj = None
+        if query_params is not None:
+            act_query_obj = ActBodyQuery.from_dict(query_params)
 
-        act_body_content = None
+        act_body_obj = None
         if body is not None:
-            act_body_content = ActBodyBody.from_dict(body)
+            act_body_obj = ActBodyBody.from_dict(body)
 
-        act_ref = ActBody(
-            path=path,
-            method=method,
-            params=act_params,  # type: ignore # Models might expect Unset if None, but factory/default handles it usually or we need Unset
-            query=act_query,    # type: ignore
-            body=act_body_content # type: ignore
-        )
-        
-        # Note: The generated models usually default to UNSET if not provided in __init__, but if provided as None it might error if strict.
-        # Let's check ActBody signature again via inspection or just rely on ignoring types if we are confident.
-        # Actually better to only pass if not None to constructor to rely on UNSET defaults.
-        
         # Re-construct with kwargs to be safe about UNSET
         act_body_kwargs = {
             "path": path,
             "method": method
         }
-        if act_params:
-            act_body_kwargs["params"] = act_params
-        if act_query:
-            act_body_kwargs["query"] = act_query
-        if act_body_content:
-            act_body_kwargs["body"] = act_body_content
+        if act_params_obj:
+            act_body_kwargs["params"] = act_params_obj
+        if act_query_obj:
+            act_body_kwargs["query"] = act_query_obj
+        if act_body_obj:
+            act_body_kwargs["body"] = act_body_obj
             
         act_ref = ActBody(**act_body_kwargs)
 
@@ -83,37 +71,37 @@ class AsyncAct:
         self, 
         path: str, 
         method: str = "GET", 
-        params: Optional[Dict[str, Any]] = None, 
-        query: Optional[Dict[str, Any]] = None, 
+        query_params: Optional[Dict[str, Any]] = None, 
+        path_params: Optional[Dict[str, Any]] = None, 
         body: Optional[Dict[str, Any]] = None
     ) -> Union[ActResponse200, Any]:
         """
         Execute a dynamic internal API call.
         """
         # Construct ActBody parts
-        act_params = None
-        if params is not None:
-            act_params = ActBodyParams.from_dict(params)
+        act_params_obj = None
+        if path_params is not None:
+            act_params_obj = ActBodyParams.from_dict(path_params)
 
-        act_query = None
-        if query is not None:
-            act_query = ActBodyQuery.from_dict(query)
+        act_query_obj = None
+        if query_params is not None:
+            act_query_obj = ActBodyQuery.from_dict(query_params)
 
-        act_body_content = None
+        act_body_obj = None
         if body is not None:
-            act_body_content = ActBodyBody.from_dict(body)
+            act_body_obj = ActBodyBody.from_dict(body)
 
         # Re-construct with kwargs to be safe about UNSET
         act_body_kwargs = {
             "path": path,
             "method": method
         }
-        if act_params:
-            act_body_kwargs["params"] = act_params
-        if act_query:
-            act_body_kwargs["query"] = act_query
-        if act_body_content:
-            act_body_kwargs["body"] = act_body_content
+        if act_params_obj:
+            act_body_kwargs["params"] = act_params_obj
+        if act_query_obj:
+            act_body_kwargs["query"] = act_query_obj
+        if act_body_obj:
+            act_body_kwargs["body"] = act_body_obj
             
         act_ref = ActBody(**act_body_kwargs)
 

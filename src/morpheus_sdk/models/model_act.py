@@ -1,12 +1,12 @@
-from typing import Optional
-from typing import Literal
+from typing import Any, Optional, Literal
 from pydantic import BaseModel
 
 class ModelActInputs(BaseModel):
-    action_string: str
-    verb: Literal["POST", "GET", "PUT", "DELETE", "PATCH"]
-    data: Optional[dict[str, Any]] = None
-    params: Optional[dict[str, Any]] = None
+    path: str
+    method: Literal["POST", "GET", "PUT", "DELETE", "PATCH"]
+    body: Optional[dict[str, Any]] = None
+    query_params: Optional[dict[str, Any]] = None
+    path_params: Optional[dict[str, Any]] = None
     
 class ModelActObservation(BaseModel):
     action_response: Optional[dict[str, Any]] = None
