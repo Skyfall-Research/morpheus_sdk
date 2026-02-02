@@ -1,0 +1,257 @@
+from http import HTTPStatus
+from typing import Any, Optional, Union
+
+import httpx
+
+from ... import errors
+from ...client import AuthenticatedClient, Client
+from ...models.error_response import ErrorResponse
+from ...models.get_wms_operations_dashboard_response_200 import GetWMSOperationsDashboardResponse200
+from ...types import Response
+
+
+def _get_kwargs(
+    world_id: str,
+) -> dict[str, Any]:
+    _kwargs: dict[str, Any] = {
+        "method": "get",
+        "url": f"/{world_id}/wms/operations-dashboard",
+    }
+
+    return _kwargs
+
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]:
+    if response.status_code == 200:
+        response_200 = GetWMSOperationsDashboardResponse200.from_dict(response.json())
+
+        return response_200
+
+    if response.status_code == 400:
+        response_400 = ErrorResponse.from_dict(response.json())
+
+        return response_400
+
+    if client.raise_on_unexpected_status:
+        raise errors.UnexpectedStatus(response.status_code, response.content)
+    else:
+        return None
+
+
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]:
+    return Response(
+        status_code=HTTPStatus(response.status_code),
+        content=response.content,
+        headers=response.headers,
+        parsed=_parse_response(client=client, response=response),
+    )
+
+
+def sync_detailed(
+    world_id: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+) -> Response[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]:
+    """Get operations dashboard metrics
+
+
+    ## Get WMS Operations Dashboard
+
+    Retrieve aggregated metrics for the WMS Command Center dashboard, providing real-time KPIs across
+    all warehouse operations.
+
+    ### Features
+    - **Real-Time Aggregation**: Live metrics calculated from current operational data
+    - **Multi-Dimensional Metrics**: Inventory, receiving, fulfillment, and task statistics
+    - **Performance Indicators**: Key operational metrics for management oversight
+    - **Parallel Processing**: Optimized concurrent data aggregation for performance
+
+    ### Metric Categories
+    - **Inventory**: Total items, status breakdown, low stock alerts, expiring items
+    - **Receiving**: Total/pending inbound orders, orders due today, receiving status
+    - **Fulfillment**: Active orders, status breakdown by workflow stage, rush orders
+    - **Tasks**: Total/pending/in-progress tasks, completed today, breakdown by type
+
+    ### Use Cases
+    - **Executive Dashboard**: High-level operational overview for management
+    - **Operational Monitoring**: Real-time tracking of warehouse performance
+    - **Alert Management**: Track low stock and expiring inventory alerts
+    - **Workload Planning**: Monitor task distribution and completion rates
+
+
+    Args:
+        world_id (str):  Example: 507f1f77bcf86cd799439011.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]
+    """
+
+    kwargs = _get_kwargs(
+        world_id=world_id,
+    )
+
+    response = client.get_httpx_client().request(
+        **kwargs,
+    )
+
+    return _build_response(client=client, response=response)
+
+
+def sync(
+    world_id: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+) -> Optional[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]:
+    """Get operations dashboard metrics
+
+
+    ## Get WMS Operations Dashboard
+
+    Retrieve aggregated metrics for the WMS Command Center dashboard, providing real-time KPIs across
+    all warehouse operations.
+
+    ### Features
+    - **Real-Time Aggregation**: Live metrics calculated from current operational data
+    - **Multi-Dimensional Metrics**: Inventory, receiving, fulfillment, and task statistics
+    - **Performance Indicators**: Key operational metrics for management oversight
+    - **Parallel Processing**: Optimized concurrent data aggregation for performance
+
+    ### Metric Categories
+    - **Inventory**: Total items, status breakdown, low stock alerts, expiring items
+    - **Receiving**: Total/pending inbound orders, orders due today, receiving status
+    - **Fulfillment**: Active orders, status breakdown by workflow stage, rush orders
+    - **Tasks**: Total/pending/in-progress tasks, completed today, breakdown by type
+
+    ### Use Cases
+    - **Executive Dashboard**: High-level operational overview for management
+    - **Operational Monitoring**: Real-time tracking of warehouse performance
+    - **Alert Management**: Track low stock and expiring inventory alerts
+    - **Workload Planning**: Monitor task distribution and completion rates
+
+
+    Args:
+        world_id (str):  Example: 507f1f77bcf86cd799439011.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[ErrorResponse, GetWMSOperationsDashboardResponse200]
+    """
+
+    return sync_detailed(
+        world_id=world_id,
+        client=client,
+    ).parsed
+
+
+async def asyncio_detailed(
+    world_id: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+) -> Response[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]:
+    """Get operations dashboard metrics
+
+
+    ## Get WMS Operations Dashboard
+
+    Retrieve aggregated metrics for the WMS Command Center dashboard, providing real-time KPIs across
+    all warehouse operations.
+
+    ### Features
+    - **Real-Time Aggregation**: Live metrics calculated from current operational data
+    - **Multi-Dimensional Metrics**: Inventory, receiving, fulfillment, and task statistics
+    - **Performance Indicators**: Key operational metrics for management oversight
+    - **Parallel Processing**: Optimized concurrent data aggregation for performance
+
+    ### Metric Categories
+    - **Inventory**: Total items, status breakdown, low stock alerts, expiring items
+    - **Receiving**: Total/pending inbound orders, orders due today, receiving status
+    - **Fulfillment**: Active orders, status breakdown by workflow stage, rush orders
+    - **Tasks**: Total/pending/in-progress tasks, completed today, breakdown by type
+
+    ### Use Cases
+    - **Executive Dashboard**: High-level operational overview for management
+    - **Operational Monitoring**: Real-time tracking of warehouse performance
+    - **Alert Management**: Track low stock and expiring inventory alerts
+    - **Workload Planning**: Monitor task distribution and completion rates
+
+
+    Args:
+        world_id (str):  Example: 507f1f77bcf86cd799439011.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]
+    """
+
+    kwargs = _get_kwargs(
+        world_id=world_id,
+    )
+
+    response = await client.get_async_httpx_client().request(**kwargs)
+
+    return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    world_id: str,
+    *,
+    client: Union[AuthenticatedClient, Client],
+) -> Optional[Union[ErrorResponse, GetWMSOperationsDashboardResponse200]]:
+    """Get operations dashboard metrics
+
+
+    ## Get WMS Operations Dashboard
+
+    Retrieve aggregated metrics for the WMS Command Center dashboard, providing real-time KPIs across
+    all warehouse operations.
+
+    ### Features
+    - **Real-Time Aggregation**: Live metrics calculated from current operational data
+    - **Multi-Dimensional Metrics**: Inventory, receiving, fulfillment, and task statistics
+    - **Performance Indicators**: Key operational metrics for management oversight
+    - **Parallel Processing**: Optimized concurrent data aggregation for performance
+
+    ### Metric Categories
+    - **Inventory**: Total items, status breakdown, low stock alerts, expiring items
+    - **Receiving**: Total/pending inbound orders, orders due today, receiving status
+    - **Fulfillment**: Active orders, status breakdown by workflow stage, rush orders
+    - **Tasks**: Total/pending/in-progress tasks, completed today, breakdown by type
+
+    ### Use Cases
+    - **Executive Dashboard**: High-level operational overview for management
+    - **Operational Monitoring**: Real-time tracking of warehouse performance
+    - **Alert Management**: Track low stock and expiring inventory alerts
+    - **Workload Planning**: Monitor task distribution and completion rates
+
+
+    Args:
+        world_id (str):  Example: 507f1f77bcf86cd799439011.
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[ErrorResponse, GetWMSOperationsDashboardResponse200]
+    """
+
+    return (
+        await asyncio_detailed(
+            world_id=world_id,
+            client=client,
+        )
+    ).parsed
