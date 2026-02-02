@@ -1,5 +1,6 @@
-from typing import Any, Optional, List
+from typing import Union
 from uuid import UUID
+import datetime
 
 from ...client.generated_api_client.client import Client
 from ...client.generated_api_client.api.itsm_tickets import get_ticket, get_tickets, update_ticket, update_ticket_status
@@ -9,19 +10,47 @@ from ...client.generated_api_client.models.update_ticket_status_body_status impo
 from ...client.generated_api_client.models.get_tickets_response_200 import GetTicketsResponse200
 from ...client.generated_api_client.models.get_ticket_response_200 import GetTicketResponse200
 from ...client.generated_api_client.models.update_ticket_response_200 import UpdateTicketResponse200
+from ...client.generated_api_client.models.get_tickets_status import GetTicketsStatus
+from ...client.generated_api_client.models.get_tickets_priority import GetTicketsPriority
+from ...client.generated_api_client.models.get_tickets_impact import GetTicketsImpact
+from ...client.generated_api_client.models.get_tickets_urgency import GetTicketsUrgency
+from ...client.generated_api_client.types import UNSET, Unset
 
 class Tasks:
     def __init__(self, client: Client, world_id: str):
         self.client = client
         self.world_id = UUID(world_id)
 
-    def list(self, **kwargs) -> GetTicketsResponse200:
+    def list(
+        self,
+        status: Union[Unset, GetTicketsStatus] = UNSET,
+        priority: Union[Unset, GetTicketsPriority] = UNSET,
+        impact: Union[Unset, GetTicketsImpact] = UNSET,
+        urgency: Union[Unset, GetTicketsUrgency] = UNSET,
+        department: Union[Unset, str] = UNSET,
+        assigned_to: Union[Unset, str] = UNSET,
+        date_start: Union[Unset, datetime.datetime] = UNSET,
+        date_end: Union[Unset, datetime.datetime] = UNSET,
+        limit: Union[Unset, int] = 100,
+        cursor: Union[Unset, str] = UNSET,
+    ) -> GetTicketsResponse200:
         """
-        List tickets with optional filtering.
-        kwargs can match arguments of get_tickets.sync_detailed:
-        status, priority, impact, urgency, department, assigned_to, date_start, date_end, limit, cursor
+        List tickets with filtering.
         """
-        response = get_tickets.sync_detailed(client=self.client, world_id=self.world_id, **kwargs)
+        response = get_tickets.sync_detailed(
+            client=self.client,
+            world_id=self.world_id,
+            status=status,
+            priority=priority,
+            impact=impact,
+            urgency=urgency,
+            department=department,
+            assigned_to=assigned_to,
+            date_start=date_start,
+            date_end=date_end,
+            limit=limit,
+            cursor=cursor,
+        )
         if response.status_code == 200:
             return response.parsed
         else:
@@ -52,8 +81,33 @@ class AsyncTasks:
         self.client = client
         self.world_id = UUID(world_id)
 
-    async def list(self, **kwargs) -> GetTicketsResponse200:
-        response = await get_tickets.asyncio_detailed(client=self.client, world_id=self.world_id, **kwargs)
+    async def list(
+        self,
+        status: Union[Unset, GetTicketsStatus] = UNSET,
+        priority: Union[Unset, GetTicketsPriority] = UNSET,
+        impact: Union[Unset, GetTicketsImpact] = UNSET,
+        urgency: Union[Unset, GetTicketsUrgency] = UNSET,
+        department: Union[Unset, str] = UNSET,
+        assigned_to: Union[Unset, str] = UNSET,
+        date_start: Union[Unset, datetime.datetime] = UNSET,
+        date_end: Union[Unset, datetime.datetime] = UNSET,
+        limit: Union[Unset, int] = 100,
+        cursor: Union[Unset, str] = UNSET,
+    ) -> GetTicketsResponse200:
+        response = await get_tickets.asyncio_detailed(
+            client=self.client,
+            world_id=self.world_id,
+            status=status,
+            priority=priority,
+            impact=impact,
+            urgency=urgency,
+            department=department,
+            assigned_to=assigned_to,
+            date_start=date_start,
+            date_end=date_end,
+            limit=limit,
+            cursor=cursor,
+        )
         if response.status_code == 200:
             return response.parsed
         else:
