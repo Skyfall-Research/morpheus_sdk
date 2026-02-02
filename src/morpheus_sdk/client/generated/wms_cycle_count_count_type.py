@@ -1,0 +1,14 @@
+from enum import Enum
+
+
+class WMSCycleCountCountType(str, Enum):
+    ABC = "ABC"
+    BLIND = "BLIND"
+    DAILY = "DAILY"
+    FULL = "FULL"
+    MONTHLY = "MONTHLY"
+    SPOT = "SPOT"
+    WEEKLY = "WEEKLY"
+
+    def __str__(self) -> str:
+        return str(self.value)
