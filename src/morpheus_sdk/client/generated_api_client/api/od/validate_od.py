@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -13,7 +12,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     body: ValidateODBody,
 ) -> dict[str, Any]:
@@ -63,7 +62,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: ValidateODBody,
@@ -73,7 +72,7 @@ def sync_detailed(
      Validates an Operational Descriptor definition against the schema without saving it.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         body (ValidateODBody): The OD definition to validate
 
     Raises:
@@ -97,7 +96,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: ValidateODBody,
@@ -107,7 +106,7 @@ def sync(
      Validates an Operational Descriptor definition against the schema without saving it.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         body (ValidateODBody): The OD definition to validate
 
     Raises:
@@ -126,7 +125,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: ValidateODBody,
@@ -136,7 +135,7 @@ async def asyncio_detailed(
      Validates an Operational Descriptor definition against the schema without saving it.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         body (ValidateODBody): The OD definition to validate
 
     Raises:
@@ -158,7 +157,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: ValidateODBody,
@@ -168,7 +167,7 @@ async def asyncio(
      Validates an Operational Descriptor definition against the schema without saving it.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         body (ValidateODBody): The OD definition to validate
 
     Raises:

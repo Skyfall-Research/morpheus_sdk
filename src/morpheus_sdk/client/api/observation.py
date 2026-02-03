@@ -114,7 +114,7 @@ class Observation:
 class AsyncObservation:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     async def audit(
         self, 

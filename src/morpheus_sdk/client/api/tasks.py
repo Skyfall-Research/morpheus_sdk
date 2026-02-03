@@ -1,5 +1,4 @@
 from typing import Union
-from uuid import UUID
 import datetime
 
 from ...client.generated_api_client.client import Client
@@ -19,7 +18,7 @@ from ...client.generated_api_client.types import UNSET, Unset
 class Tasks:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     def list(
         self,
@@ -79,7 +78,7 @@ class Tasks:
 class AsyncTasks:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     async def list(
         self,

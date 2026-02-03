@@ -1,7 +1,6 @@
 import datetime
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -15,7 +14,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     service_type: Union[Unset, GetLogsServiceType] = UNSET,
     level: Union[Unset, GetLogsLevel] = UNSET,
@@ -107,7 +106,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     service_type: Union[Unset, GetLogsServiceType] = UNSET,
@@ -143,7 +142,7 @@ def sync_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         service_type (Union[Unset, GetLogsServiceType]):  Example: edi.
         level (Union[Unset, GetLogsLevel]):  Example: error.
         search_text (Union[Unset, str]):  Example: purchase order validation.
@@ -179,7 +178,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     service_type: Union[Unset, GetLogsServiceType] = UNSET,
@@ -215,7 +214,7 @@ def sync(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         service_type (Union[Unset, GetLogsServiceType]):  Example: edi.
         level (Union[Unset, GetLogsLevel]):  Example: error.
         search_text (Union[Unset, str]):  Example: purchase order validation.
@@ -246,7 +245,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     service_type: Union[Unset, GetLogsServiceType] = UNSET,
@@ -282,7 +281,7 @@ async def asyncio_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         service_type (Union[Unset, GetLogsServiceType]):  Example: edi.
         level (Union[Unset, GetLogsLevel]):  Example: error.
         search_text (Union[Unset, str]):  Example: purchase order validation.
@@ -316,7 +315,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     service_type: Union[Unset, GetLogsServiceType] = UNSET,
@@ -352,7 +351,7 @@ async def asyncio(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         service_type (Union[Unset, GetLogsServiceType]):  Example: edi.
         level (Union[Unset, GetLogsLevel]):  Example: error.
         search_text (Union[Unset, str]):  Example: purchase order validation.

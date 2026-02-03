@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -12,7 +11,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     body: ExecuteODBody,
@@ -58,7 +57,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -69,7 +68,7 @@ def sync_detailed(
      Triggers the immediate execution of an OD workflow.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         body (ExecuteODBody):
 
@@ -95,7 +94,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -106,7 +105,7 @@ def sync(
      Triggers the immediate execution of an OD workflow.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         body (ExecuteODBody):
 
@@ -127,7 +126,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -138,7 +137,7 @@ async def asyncio_detailed(
      Triggers the immediate execution of an OD workflow.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         body (ExecuteODBody):
 
@@ -162,7 +161,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -173,7 +172,7 @@ async def asyncio(
      Triggers the immediate execution of an OD workflow.
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         body (ExecuteODBody):
 

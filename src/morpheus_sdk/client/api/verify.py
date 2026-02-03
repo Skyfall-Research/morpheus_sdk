@@ -1,5 +1,4 @@
 from typing import Union, Optional
-from uuid import UUID
 
 from ...client.generated_api_client.client import Client
 from ...client.generated_api_client.api.verification import verify_entity, verify_ticket
@@ -11,7 +10,7 @@ from ...client.generated_api_client.models.verify_entity_body_entity_type import
 class Verify:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     def ticket(self, ticket_id: str) -> VerificationResult:
         body = VerifyTicketBody(ticket_id=ticket_id)
@@ -57,7 +56,7 @@ class Verify:
 class AsyncVerify:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     async def ticket(self, ticket_id: str) -> VerificationResult:
         body = VerifyTicketBody(ticket_id=ticket_id)

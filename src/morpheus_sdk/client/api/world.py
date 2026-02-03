@@ -1,6 +1,6 @@
 from typing import Optional
 from ...client.generated_api_client.client import Client
-from ...client.generated_api_client.api.world import create_world, delete_world, reset_world
+from ...client.generated_api_client.api.world import create_world, delete_world, reset_world, list_worlds
 from ...client.generated_api_client.models.create_world_body import CreateWorldBody
 
 class World:
@@ -32,6 +32,17 @@ class World:
          response = reset_world.sync_detailed(client=self.client, world_id=self.world_id)
          if response.status_code != 200:
              raise Exception(f"Failed to reset world: {response.status_code} {response.content}")
+    
+    def get_default_world(self):
+        response = list_worlds.sync_detailed(client=self.client, is_default=True)
+        if response.status_code == 200:
+            if response.parsed and response.parsed.worlds and len(response.parsed.worlds) > 0:
+                self.world_id = response.parsed.worlds[0].id
+                return response.parsed.worlds[0]
+            else:
+                raise Exception("No default world found")
+        else:
+             raise Exception(f"Failed to get default world: {response.status_code} {response.content}")
 
 class AsyncWorld:
     def __init__(self, client: Client):
@@ -62,3 +73,14 @@ class AsyncWorld:
          response = await reset_world.asyncio_detailed(client=self.client, world_id=self.world_id)
          if response.status_code != 200:
              raise Exception(f"Failed to reset world: {response.status_code} {response.content}")
+
+    async def get_default_world(self):
+        response = await list_worlds.asyncio_detailed(client=self.client, is_default=True)
+        if response.status_code == 200:
+            if response.parsed and response.parsed.worlds and len(response.parsed.worlds) > 0:
+                self.world_id = response.parsed.worlds[0].id
+                return response.parsed.worlds[0]
+            else:
+                raise Exception("No default world found")
+        else:
+             raise Exception(f"Failed to get default world: {response.status_code} {response.content}")

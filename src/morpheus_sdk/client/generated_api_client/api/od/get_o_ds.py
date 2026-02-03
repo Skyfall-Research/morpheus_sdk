@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -12,7 +11,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     od_type: Union[Unset, GetODsOdType] = UNSET,
     name: Union[Unset, str] = UNSET,
@@ -70,7 +69,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     od_type: Union[Unset, GetODsOdType] = UNSET,
@@ -91,7 +90,7 @@ def sync_detailed(
 
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_type (Union[Unset, GetODsOdType]):
         name (Union[Unset, str]):
         cursor (Union[Unset, str]):
@@ -121,7 +120,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     od_type: Union[Unset, GetODsOdType] = UNSET,
@@ -142,7 +141,7 @@ def sync(
 
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_type (Union[Unset, GetODsOdType]):
         name (Union[Unset, str]):
         cursor (Union[Unset, str]):
@@ -167,7 +166,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     od_type: Union[Unset, GetODsOdType] = UNSET,
@@ -188,7 +187,7 @@ async def asyncio_detailed(
 
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_type (Union[Unset, GetODsOdType]):
         name (Union[Unset, str]):
         cursor (Union[Unset, str]):
@@ -216,7 +215,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     od_type: Union[Unset, GetODsOdType] = UNSET,
@@ -237,7 +236,7 @@ async def asyncio(
 
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_type (Union[Unset, GetODsOdType]):
         name (Union[Unset, str]):
         cursor (Union[Unset, str]):

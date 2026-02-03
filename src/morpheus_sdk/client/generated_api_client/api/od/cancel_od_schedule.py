@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -11,7 +10,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     job_id: str,
 ) -> dict[str, Any]:
@@ -49,7 +48,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     job_id: str,
     *,
@@ -58,7 +57,7 @@ def sync_detailed(
     """Cancel a scheduled OD job
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         job_id (str):
 
@@ -84,7 +83,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     job_id: str,
     *,
@@ -93,7 +92,7 @@ def sync(
     """Cancel a scheduled OD job
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         job_id (str):
 
@@ -114,7 +113,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     job_id: str,
     *,
@@ -123,7 +122,7 @@ async def asyncio_detailed(
     """Cancel a scheduled OD job
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         job_id (str):
 
@@ -147,7 +146,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     job_id: str,
     *,
@@ -156,7 +155,7 @@ async def asyncio(
     """Cancel a scheduled OD job
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
         job_id (str):
 

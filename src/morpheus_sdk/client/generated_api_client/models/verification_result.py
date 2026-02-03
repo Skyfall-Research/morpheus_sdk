@@ -1,7 +1,6 @@
 import datetime
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
-from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -26,7 +25,7 @@ class VerificationResult:
     Attributes:
         passed (bool): Overall pass/fail status of the verification
         ticket_id (str): ID of the ticket being verified Example: 507f1f77bcf86cd799439011.
-        world_id (UUID): ID of the world where verification ran Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str): ID of the world where verification ran Example: 550e8400-e29b-41d4-a716-446655440000.
         timestamp (datetime.datetime): When the verification was performed Example: 2024-01-15T10:30:00.000Z.
         total_checks (int): Total number of checks performed Example: 10.
         passed_checks (int): Number of passed checks Example: 8.
@@ -42,7 +41,7 @@ class VerificationResult:
 
     passed: bool
     ticket_id: str
-    world_id: UUID
+    world_id: str
     timestamp: datetime.datetime
     total_checks: int
     passed_checks: int
@@ -148,7 +147,7 @@ class VerificationResult:
 
         ticket_id = d.pop("ticketId")
 
-        world_id = UUID(d.pop("worldId"))
+        world_id = str(d.pop("worldId"))
 
         timestamp = isoparse(d.pop("timestamp"))
 

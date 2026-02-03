@@ -1,6 +1,5 @@
 from collections.abc import Mapping
 from typing import Any, TypeVar
-from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,10 +12,10 @@ class ERPCompanyWorldRef:
     """Reference to the world this company belongs to
 
     Attributes:
-        world_id (UUID): Unique identifier of the world Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str): Unique identifier of the world Example: 550e8400-e29b-41d4-a716-446655440000.
     """
 
-    world_id: UUID
+    world_id: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,7 +34,7 @@ class ERPCompanyWorldRef:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        world_id = UUID(d.pop("worldId"))
+        world_id = str(d.pop("worldId"))
 
         erp_company_world_ref = cls(
             world_id=world_id,

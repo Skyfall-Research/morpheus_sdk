@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -12,7 +11,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
 ) -> dict[str, Any]:
     _kwargs: dict[str, Any] = {
@@ -54,7 +53,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -62,7 +61,7 @@ def sync_detailed(
     """Get an Operational Descriptor by ID
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
 
     Raises:
@@ -86,7 +85,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -94,7 +93,7 @@ def sync(
     """Get an Operational Descriptor by ID
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
 
     Raises:
@@ -113,7 +112,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -121,7 +120,7 @@ async def asyncio_detailed(
     """Get an Operational Descriptor by ID
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
 
     Raises:
@@ -143,7 +142,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     od_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
@@ -151,7 +150,7 @@ async def asyncio(
     """Get an Operational Descriptor by ID
 
     Args:
-        world_id (UUID):
+        world_id (str):
         od_id (str):
 
     Raises:

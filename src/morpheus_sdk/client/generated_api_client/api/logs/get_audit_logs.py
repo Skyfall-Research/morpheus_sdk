@@ -1,7 +1,6 @@
 import datetime
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -14,7 +13,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     model: Union[Unset, GetAuditLogsModel] = UNSET,
     document_id: Union[Unset, str] = UNSET,
@@ -93,7 +92,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     model: Union[Unset, GetAuditLogsModel] = UNSET,
@@ -135,7 +134,7 @@ def sync_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         model (Union[Unset, GetAuditLogsModel]):  Example: EdiTransaction.
         document_id (Union[Unset, str]):  Example: edi_txn_123456789.
         date_start (Union[Unset, datetime.datetime]):  Example: 2024-01-15T00:00:00.000Z.
@@ -165,7 +164,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     model: Union[Unset, GetAuditLogsModel] = UNSET,
@@ -207,7 +206,7 @@ def sync(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         model (Union[Unset, GetAuditLogsModel]):  Example: EdiTransaction.
         document_id (Union[Unset, str]):  Example: edi_txn_123456789.
         date_start (Union[Unset, datetime.datetime]):  Example: 2024-01-15T00:00:00.000Z.
@@ -232,7 +231,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     model: Union[Unset, GetAuditLogsModel] = UNSET,
@@ -274,7 +273,7 @@ async def asyncio_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         model (Union[Unset, GetAuditLogsModel]):  Example: EdiTransaction.
         document_id (Union[Unset, str]):  Example: edi_txn_123456789.
         date_start (Union[Unset, datetime.datetime]):  Example: 2024-01-15T00:00:00.000Z.
@@ -302,7 +301,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     model: Union[Unset, GetAuditLogsModel] = UNSET,
@@ -344,7 +343,7 @@ async def asyncio(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         model (Union[Unset, GetAuditLogsModel]):  Example: EdiTransaction.
         document_id (Union[Unset, str]):  Example: edi_txn_123456789.
         date_start (Union[Unset, datetime.datetime]):  Example: 2024-01-15T00:00:00.000Z.

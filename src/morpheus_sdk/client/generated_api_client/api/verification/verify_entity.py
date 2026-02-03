@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -14,7 +13,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     body: VerifyEntityBody,
 ) -> dict[str, Any]:
@@ -69,7 +68,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: VerifyEntityBody,
@@ -81,7 +80,7 @@ def sync_detailed(
     creates a virtual verification context and does *not* require an existing failure ticket.
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (VerifyEntityBody):
 
     Raises:
@@ -105,7 +104,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: VerifyEntityBody,
@@ -117,7 +116,7 @@ def sync(
     creates a virtual verification context and does *not* require an existing failure ticket.
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (VerifyEntityBody):
 
     Raises:
@@ -136,7 +135,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: VerifyEntityBody,
@@ -148,7 +147,7 @@ async def asyncio_detailed(
     creates a virtual verification context and does *not* require an existing failure ticket.
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (VerifyEntityBody):
 
     Raises:
@@ -170,7 +169,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: VerifyEntityBody,
@@ -182,7 +181,7 @@ async def asyncio(
     creates a virtual verification context and does *not* require an existing failure ticket.
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (VerifyEntityBody):
 
     Raises:

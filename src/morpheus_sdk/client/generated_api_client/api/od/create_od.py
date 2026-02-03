@@ -1,6 +1,5 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -13,7 +12,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     body: CreateODBody,
 ) -> dict[str, Any]:
@@ -63,7 +62,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: CreateODBody,
@@ -90,7 +89,7 @@ def sync_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (CreateODBody):
 
     Raises:
@@ -114,7 +113,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: CreateODBody,
@@ -141,7 +140,7 @@ def sync(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (CreateODBody):
 
     Raises:
@@ -160,7 +159,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: CreateODBody,
@@ -187,7 +186,7 @@ async def asyncio_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (CreateODBody):
 
     Raises:
@@ -209,7 +208,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     body: CreateODBody,
@@ -236,7 +235,7 @@ async def asyncio(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         body (CreateODBody):
 
     Raises:

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, Literal, Optional, Union
 from pydantic import BaseModel
 
 class ModelActionSpaceMeshDocsInputs(BaseModel):
@@ -15,3 +15,5 @@ class ModelActionSpaceObservation(BaseModel):
     status: Optional[int] = None
     success: Optional[bool] = None
     error: Optional[str] = None
+
+ModelActionSpaceInputs = Union[ModelActionSpaceMeshDocsInputs, ModelActionSpaceTrajectoryInputs]

@@ -1,5 +1,4 @@
 from typing import Optional, Union
-from uuid import UUID
 
 from ...client.generated_api_client.client import Client
 from ...client.generated_api_client.api.system import get_docs_mesh
@@ -11,7 +10,7 @@ from ...client.generated_api_client.models.get_od_by_id_response_200 import GetO
 class ActionSpace:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     def mesh_docs(
         self,
@@ -71,7 +70,7 @@ class ActionSpace:
 class AsyncActionSpace:
     def __init__(self, client: Client, world_id: str):
         self.client = client
-        self.world_id = UUID(world_id)
+        self.world_id = world_id
 
     async def mesh_docs(
         self,

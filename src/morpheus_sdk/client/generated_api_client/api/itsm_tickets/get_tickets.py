@@ -1,7 +1,6 @@
 import datetime
 from http import HTTPStatus
 from typing import Any, Optional, Union
-from uuid import UUID
 
 import httpx
 
@@ -16,7 +15,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    world_id: UUID,
+    world_id: str,
     *,
     status: Union[Unset, GetTicketsStatus] = UNSET,
     priority: Union[Unset, GetTicketsPriority] = UNSET,
@@ -110,7 +109,7 @@ def _build_response(
 
 
 def sync_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     status: Union[Unset, GetTicketsStatus] = UNSET,
@@ -150,7 +149,7 @@ def sync_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         status (Union[Unset, GetTicketsStatus]):  Example: open.
         priority (Union[Unset, GetTicketsPriority]):  Example: high.
         impact (Union[Unset, GetTicketsImpact]):  Example: medium.
@@ -192,7 +191,7 @@ def sync_detailed(
 
 
 def sync(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     status: Union[Unset, GetTicketsStatus] = UNSET,
@@ -232,7 +231,7 @@ def sync(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         status (Union[Unset, GetTicketsStatus]):  Example: open.
         priority (Union[Unset, GetTicketsPriority]):  Example: high.
         impact (Union[Unset, GetTicketsImpact]):  Example: medium.
@@ -269,7 +268,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     status: Union[Unset, GetTicketsStatus] = UNSET,
@@ -309,7 +308,7 @@ async def asyncio_detailed(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         status (Union[Unset, GetTicketsStatus]):  Example: open.
         priority (Union[Unset, GetTicketsPriority]):  Example: high.
         impact (Union[Unset, GetTicketsImpact]):  Example: medium.
@@ -349,7 +348,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    world_id: UUID,
+    world_id: str,
     *,
     client: Union[AuthenticatedClient, Client],
     status: Union[Unset, GetTicketsStatus] = UNSET,
@@ -389,7 +388,7 @@ async def asyncio(
 
 
     Args:
-        world_id (UUID):  Example: 550e8400-e29b-41d4-a716-446655440000.
+        world_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
         status (Union[Unset, GetTicketsStatus]):  Example: open.
         priority (Union[Unset, GetTicketsPriority]):  Example: high.
         impact (Union[Unset, GetTicketsImpact]):  Example: medium.
