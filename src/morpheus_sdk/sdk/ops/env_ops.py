@@ -16,7 +16,6 @@ def execute_create_sync(wrapper: World, inputs: ModelCreateEnvInputs) -> ModelEn
             real_hours_per_sim_day=inputs.real_hours_per_sim_day
         )
         created_body = wrapper.create(body)
-        
         return ModelEnvOutput(
             status=200, 
             data=created_body.to_dict(), 
@@ -35,7 +34,6 @@ async def execute_create_async(wrapper: AsyncWorld, inputs: ModelCreateEnvInputs
             real_hours_per_sim_day=inputs.real_hours_per_sim_day
         )
         created_body = await wrapper.create(body)
-        
         return ModelEnvOutput(
             status=200, 
             data=created_body.to_dict(), 

@@ -14,9 +14,19 @@ from ..models.model_http_client import ModelHttpClientInputs
 from ..models.model_env import ModelCreateEnvInputs, ModelEnvOutput
 from ..models.model_act import ModelActInputs, ModelActObservation
 from ..models.model_state import ModelStateInputs, ModelStateOutputs
-from ..models.model_verify import ModelVerifyInputs, ModelVerifyOutput
+from ..models.model_verify import (
+    ModelVerifyInputs, 
+    ModelVerifyOutput,
+    ModelVerifyTicketInputs,
+    ModelVerifyEntityInputs
+)
 from ..models.model_task import ModelTaskInputs, ModelTaskOutputs
-from ..models.model_action_space import ModelActionSpaceInputs, ModelActionSpaceObservation
+from ..models.model_action_space import (
+    ModelActionSpaceInputs, 
+    ModelActionSpaceObservation,
+    ModelActionSpaceMeshDocsInputs,
+    ModelActionSpaceTrajectoryInputs
+)
 
 # Operations
 from .ops.env_ops import execute_create_sync, execute_delete_sync, execute_reset_sync, execute_create_async, execute_delete_async, execute_reset_async
@@ -43,10 +53,14 @@ __all__ = [
     "ModelStateOutputs",
     "ModelVerifyInputs", 
     "ModelVerifyOutput",
+    "ModelVerifyTicketInputs",
+    "ModelVerifyEntityInputs",
     "ModelTaskInputs", 
     "ModelTaskOutputs",
     "ModelActionSpaceInputs", 
     "ModelActionSpaceObservation",
+    "ModelActionSpaceMeshDocsInputs",
+    "ModelActionSpaceTrajectoryInputs",
 ]
 
 class Morpheus:

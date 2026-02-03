@@ -19,7 +19,7 @@ class ERPCompanyWorldRef:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        world_id = str(self.world_id)
+        world_id = self.world_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -34,7 +34,7 @@ class ERPCompanyWorldRef:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        world_id = str(d.pop("worldId"))
+        world_id = d.pop("worldId")
 
         erp_company_world_ref = cls(
             world_id=world_id,

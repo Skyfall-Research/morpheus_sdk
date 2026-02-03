@@ -14,28 +14,28 @@ class WMSOutboundShipmentToAddress:
     """Required destination address (validated in repository)
 
     Attributes:
-        street (str): Street address Example: 123 Customer Ave.
+        street1 (str): Street address Example: 123 Customer Ave.
         city (str): City name Example: Miami.
         state (str): State/province Example: FL.
-        zip_code (str): Postal code Example: 33101.
+        postal_code (str): Postal code Example: 33101.
         country (Union[Unset, str]): Country code Example: USA.
     """
 
-    street: str
+    street1: str
     city: str
     state: str
-    zip_code: str
+    postal_code: str
     country: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        street = self.street
+        street1 = self.street1
 
         city = self.city
 
         state = self.state
 
-        zip_code = self.zip_code
+        postal_code = self.postal_code
 
         country = self.country
 
@@ -43,10 +43,10 @@ class WMSOutboundShipmentToAddress:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "street": street,
+                "street1": street1,
                 "city": city,
                 "state": state,
-                "zipCode": zip_code,
+                "postalCode": postal_code,
             }
         )
         if country is not UNSET:
@@ -57,21 +57,21 @@ class WMSOutboundShipmentToAddress:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        street = d.pop("street")
+        street1 = d.pop("street1")
 
         city = d.pop("city")
 
         state = d.pop("state")
 
-        zip_code = d.pop("zipCode")
+        postal_code = d.pop("postalCode")
 
         country = d.pop("country", UNSET)
 
         wms_outbound_shipment_to_address = cls(
-            street=street,
+            street1=street1,
             city=city,
             state=state,
-            zip_code=zip_code,
+            postal_code=postal_code,
             country=country,
         )
 

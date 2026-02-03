@@ -14,42 +14,42 @@ class WMSOutboundShipmentFromAddress:
     """Origin address (typically warehouse)
 
     Attributes:
-        street (Union[Unset, str]): Street address Example: 100 Warehouse Blvd.
+        street1 (Union[Unset, str]): Street address Example: 100 Warehouse Blvd.
         city (Union[Unset, str]): City name Example: Atlanta.
         state (Union[Unset, str]): State/province Example: GA.
-        zip_code (Union[Unset, str]): Postal code Example: 30309.
+        postal_code (Union[Unset, str]): Postal code Example: 30309.
         country (Union[Unset, str]): Country code Example: USA.
     """
 
-    street: Union[Unset, str] = UNSET
+    street1: Union[Unset, str] = UNSET
     city: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
-    zip_code: Union[Unset, str] = UNSET
+    postal_code: Union[Unset, str] = UNSET
     country: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        street = self.street
+        street1 = self.street1
 
         city = self.city
 
         state = self.state
 
-        zip_code = self.zip_code
+        postal_code = self.postal_code
 
         country = self.country
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if street is not UNSET:
-            field_dict["street"] = street
+        if street1 is not UNSET:
+            field_dict["street1"] = street1
         if city is not UNSET:
             field_dict["city"] = city
         if state is not UNSET:
             field_dict["state"] = state
-        if zip_code is not UNSET:
-            field_dict["zipCode"] = zip_code
+        if postal_code is not UNSET:
+            field_dict["postalCode"] = postal_code
         if country is not UNSET:
             field_dict["country"] = country
 
@@ -58,21 +58,21 @@ class WMSOutboundShipmentFromAddress:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        street = d.pop("street", UNSET)
+        street1 = d.pop("street1", UNSET)
 
         city = d.pop("city", UNSET)
 
         state = d.pop("state", UNSET)
 
-        zip_code = d.pop("zipCode", UNSET)
+        postal_code = d.pop("postalCode", UNSET)
 
         country = d.pop("country", UNSET)
 
         wms_outbound_shipment_from_address = cls(
-            street=street,
+            street1=street1,
             city=city,
             state=state,
-            zip_code=zip_code,
+            postal_code=postal_code,
             country=country,
         )
 

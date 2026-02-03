@@ -14,7 +14,7 @@ class UpdateWarehouseBodyAddress:
     """Updated warehouse address
 
     Attributes:
-        street (Union[Unset, str]):  Example: 5678 Logistics Parkway.
+        street1 (Union[Unset, str]):  Example: 5678 Logistics Parkway.
         city (Union[Unset, str]):  Example: Atlanta.
         state (Union[Unset, str]):  Example: GA.
         postal_code (Union[Unset, str]):  Example: 30309.
@@ -23,7 +23,7 @@ class UpdateWarehouseBodyAddress:
         longitude (Union[Unset, float]):  Example: -84.388.
     """
 
-    street: Union[Unset, str] = UNSET
+    street1: Union[Unset, str] = UNSET
     city: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
     postal_code: Union[Unset, str] = UNSET
@@ -33,7 +33,7 @@ class UpdateWarehouseBodyAddress:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        street = self.street
+        street1 = self.street1
 
         city = self.city
 
@@ -50,8 +50,8 @@ class UpdateWarehouseBodyAddress:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if street is not UNSET:
-            field_dict["street"] = street
+        if street1 is not UNSET:
+            field_dict["street1"] = street1
         if city is not UNSET:
             field_dict["city"] = city
         if state is not UNSET:
@@ -70,7 +70,7 @@ class UpdateWarehouseBodyAddress:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        street = d.pop("street", UNSET)
+        street1 = d.pop("street1", UNSET)
 
         city = d.pop("city", UNSET)
 
@@ -85,7 +85,7 @@ class UpdateWarehouseBodyAddress:
         longitude = d.pop("longitude", UNSET)
 
         update_warehouse_body_address = cls(
-            street=street,
+            street1=street1,
             city=city,
             state=state,
             postal_code=postal_code,

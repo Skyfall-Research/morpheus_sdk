@@ -66,14 +66,14 @@ class GetLogsResponse200Pagination:
                 return data
             return cast(Union[None, str], data)
 
-        next_cursor = _parse_next_cursor(d.pop("nextCursor"))
-
+        next_cursor = _parse_next_cursor(d.pop("nextCursor", None))
+        
         def _parse_previous_cursor(data: object) -> Union[None, str]:
             if data is None:
                 return data
             return cast(Union[None, str], data)
 
-        previous_cursor = _parse_previous_cursor(d.pop("previousCursor"))
+        previous_cursor = _parse_previous_cursor(d.pop("previousCursor", None))
 
         get_logs_response_200_pagination = cls(
             total_count=total_count,

@@ -61,7 +61,7 @@ class VerificationResult:
 
         ticket_id = self.ticket_id
 
-        world_id = str(self.world_id)
+        world_id = self.world_id
 
         timestamp = self.timestamp.isoformat()
 
@@ -147,7 +147,7 @@ class VerificationResult:
 
         ticket_id = d.pop("ticketId")
 
-        world_id = str(d.pop("worldId"))
+        world_id = d.pop("worldId")
 
         timestamp = isoparse(d.pop("timestamp"))
 

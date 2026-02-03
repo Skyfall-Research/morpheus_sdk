@@ -14,14 +14,14 @@ class CreateWMSDistributionCenterBodyAddress:
     """Physical address of the distribution center
 
     Attributes:
-        street (Union[Unset, str]):  Example: 1234 Industrial Blvd.
+        street1 (Union[Unset, str]):  Example: 1234 Industrial Blvd.
         city (Union[Unset, str]):  Example: Atlanta.
         state (Union[Unset, str]):  Example: GA.
         zip_code (Union[Unset, str]):  Example: 30309.
         country (Union[Unset, str]):  Example: US.
     """
 
-    street: Union[Unset, str] = UNSET
+    street1: Union[Unset, str] = UNSET
     city: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
     zip_code: Union[Unset, str] = UNSET
@@ -29,7 +29,7 @@ class CreateWMSDistributionCenterBodyAddress:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        street = self.street
+        street1 = self.street1
 
         city = self.city
 
@@ -42,8 +42,8 @@ class CreateWMSDistributionCenterBodyAddress:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if street is not UNSET:
-            field_dict["street"] = street
+        if street1 is not UNSET:
+            field_dict["street1"] = street1
         if city is not UNSET:
             field_dict["city"] = city
         if state is not UNSET:
@@ -58,7 +58,7 @@ class CreateWMSDistributionCenterBodyAddress:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        street = d.pop("street", UNSET)
+        street1 = d.pop("street1", UNSET)
 
         city = d.pop("city", UNSET)
 
@@ -69,7 +69,7 @@ class CreateWMSDistributionCenterBodyAddress:
         country = d.pop("country", UNSET)
 
         create_wms_distribution_center_body_address = cls(
-            street=street,
+            street1=street1,
             city=city,
             state=state,
             zip_code=zip_code,

@@ -11,8 +11,8 @@ class World:
     def create(self, body: CreateWorldBody) -> CreateWorldBody:
         response = create_world.sync_detailed(client=self.client, body=body)
         if response.status_code == 200:
-            if response.parsed and response.parsed.world and response.parsed.world.id:
-                self.world_id = response.parsed.world.id
+            if response.parsed and response.parsed.world and response.parsed.world.field_id:
+                self.world_id = response.parsed.world.field_id
             return body
         else:
              raise Exception(f"Failed to create world: {response.status_code} {response.content}")
@@ -37,7 +37,7 @@ class World:
         response = list_worlds.sync_detailed(client=self.client, is_default=True)
         if response.status_code == 200:
             if response.parsed and response.parsed.worlds and len(response.parsed.worlds) > 0:
-                self.world_id = response.parsed.worlds[0].id
+                self.world_id = response.parsed.worlds[0].field_id
                 return response.parsed.worlds[0]
             else:
                 raise Exception("No default world found")
@@ -52,8 +52,8 @@ class AsyncWorld:
     async def create(self, body: CreateWorldBody) -> CreateWorldBody:
         response = await create_world.asyncio_detailed(client=self.client, body=body)
         if response.status_code == 200:
-            if response.parsed and response.parsed.world and response.parsed.world.id:
-                self.world_id = response.parsed.world.id
+            if response.parsed and response.parsed.world and response.parsed.world.field_id:
+                self.world_id = response.parsed.world.field_id
             return body
         else:
              raise Exception(f"Failed to create world: {response.status_code} {response.content}")
@@ -78,7 +78,7 @@ class AsyncWorld:
         response = await list_worlds.asyncio_detailed(client=self.client, is_default=True)
         if response.status_code == 200:
             if response.parsed and response.parsed.worlds and len(response.parsed.worlds) > 0:
-                self.world_id = response.parsed.worlds[0].id
+                self.world_id = response.parsed.worlds[0].field_id
                 return response.parsed.worlds[0]
             else:
                 raise Exception("No default world found")

@@ -14,7 +14,7 @@ class Address:
     """Physical address for billing, shipping, or remittance
 
     Attributes:
-        street (str): Street address Example: 123 Main St.
+        street1 (str): Street address Example: 123 Main St.
         city (str): City name Example: Atlanta.
         state (str): State or province code Example: GA.
         postal_code (str): Postal/ZIP code Example: 30303.
@@ -22,7 +22,7 @@ class Address:
         street2 (Union[Unset, str]): Additional address line Example: Suite 100.
     """
 
-    street: str
+    street1: str
     city: str
     state: str
     postal_code: str
@@ -31,7 +31,7 @@ class Address:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        street = self.street
+        street1 = self.street1
 
         city = self.city
 
@@ -47,7 +47,7 @@ class Address:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "street": street,
+                "street1": street1,
                 "city": city,
                 "state": state,
                 "postalCode": postal_code,
@@ -62,7 +62,7 @@ class Address:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        street = d.pop("street")
+        street1 = d.pop("street1")
 
         city = d.pop("city")
 
@@ -75,7 +75,7 @@ class Address:
         street2 = d.pop("street2", UNSET)
 
         address = cls(
-            street=street,
+            street1=street1,
             city=city,
             state=state,
             postal_code=postal_code,
