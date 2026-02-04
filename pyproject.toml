@@ -19,6 +19,12 @@ dependencies = [
     "python-dateutil>=2.9.0.post0",
 ]
 
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "hatch>=1.12.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/TalkShopClub/morpheus_sdk"
 Repository = "https://github.com/TalkShopClub/morpheus_sdk"

@@ -63,10 +63,10 @@ jobs:
       - name: Bump version
         id: bump
         run: |
-          hatch version ${{ github.event.inputs.version_type }}
-          NEW_VERSION=$(hatch version)
-          echo "NEW_VERSION=v$NEW_VERSION" >> $GITHUB_ENV
-          echo "version=v$NEW_VERSION" >> $GITHUB_OUTPUT
+            uv run hatch version ${{ github.event.inputs.version_type }}
+            NEW_VERSION=$(uv run hatch version)
+            echo "NEW_VERSION=v$NEW_VERSION" >> $GITHUB_ENV
+            echo "version=v$NEW_VERSION" >> $GITHUB_OUTPUT
           
       - name: Commit and Push changes
         run: |
