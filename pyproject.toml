@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "morpheus-sdk"
-version = "0.0.1"
+dynamic = ["version"]
 description = "Morpheus SDK for Python"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -29,6 +29,9 @@ dev = [
 Homepage = "https://github.com/TalkShopClub/morpheus_sdk"
 Repository = "https://github.com/TalkShopClub/morpheus_sdk"
 Issues = "https://github.com/TalkShopClub/morpheus_sdk/issues"
+
+[tool.hatch.version]
+path = "src/morpheus_sdk/__about__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/morpheus_sdk"]
