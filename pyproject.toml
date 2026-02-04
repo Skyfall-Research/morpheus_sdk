@@ -8,12 +8,21 @@ version = "0.0.1"
 description = "Morpheus SDK for Python"
 readme = "README.md"
 requires-python = ">=3.9"
+authors = [
+    { name = "Ankit Kumar", email = "ankit@skyfall.ai" }
+]
+keywords = ["morpheus", "sdk", "api", "client"]
 dependencies = [
     "attrs>=25.4.0",
     "httpx>=0.28.1",
     "pydantic>=2.12.5",
     "python-dateutil>=2.9.0.post0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/TalkShopClub/morpheus_sdk"
+Repository = "https://github.com/TalkShopClub/morpheus_sdk"
+Issues = "https://github.com/TalkShopClub/morpheus_sdk/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/morpheus_sdk"]

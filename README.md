@@ -4,8 +4,16 @@ The Morpheus SDK provides a high-level, developer-friendly interface for interac
 
 ## Installation
 
+To install from GitHub:
 ```bash
-pip install morpheus-sdk
+pip install git+https://github.com/TalkShopClub/morpheus_sdk.git
+```
+
+Or for development:
+```bash
+git clone https://github.com/TalkShopClub/morpheus_sdk.git
+cd morpheus_sdk
+uv sync
 ```
 
 ## Quick Start
