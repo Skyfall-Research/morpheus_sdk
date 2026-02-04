@@ -70,7 +70,7 @@ jobs:
           
       - name: Commit and Push changes
         run: |
-          git add pyproject.toml
+          git add src/morpheus_sdk/__about__.py
           git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
           git tag ${{ env.NEW_VERSION }}
           git push origin main --tags
