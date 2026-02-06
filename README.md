@@ -1,202 +1,173 @@
 # Morpheus SDK
 
-The Morpheus SDK provides a high-level, developer-friendly interface for interacting with the Morpheus ControlMart API. It allows agents and developers to create simulation environments ("Worlds"), perform actions, observe state, verify outcomes, and manage tasks.
+The **Morpheus SDK** provides a high-level, developer-friendly interface for interacting with the Morpheus ControlMart API (the "Backend"). It is designed for two primary audiences:
+1.  **Developers** building agents and automations who need a clean Pythonic client.
+2.  **Reinforcement Learning (RL) Researchers** who need a Gymnasium-compatible environment to train and test agents.
 
-## Installation
+---
 
-To install from GitHub:
+## 1. Installation
+
+To install the SDK and its dependencies (including `gymnasium` and `numpy`):
+
 ```bash
 pip install git+https://github.com/TalkShopClub/morpheus_sdk.git
 ```
 
-Or for development:
+Or for local development:
 ```bash
 git clone https://github.com/TalkShopClub/morpheus_sdk.git
 cd morpheus_sdk
-uv sync
+uv sync  # or pip install -e .
 ```
 
-## Quick Start
+---
+
+## 2. Using the Standard SDK
+
+The standard SDK allows granular control over the Morpheus world via Python objects and methods. This is best for scripted agents, integration tests, or when you need direct access to strict types.
+
+### Initialization
 
 ```python
 from morpheus_sdk.sdk.morpheus import Morpheus, ModelCreateEnvInputs
 
-# Initialize the SDK
+# Initialize with default settings (localhost:8000 or defined via env vars)
 sdk = Morpheus()
 
-# Create a new private World environment
-env_output = sdk.create(ModelCreateEnvInputs(
-    name="My Simulation",
-    description="Testing agent behavior",
-    real_hours_per_sim_day=24
-))
-
-print(f"World created: {sdk.world_id}")
-```
-
-## Core Concepts
-
-The SDK is built around the `Morpheus` class (and its async counterpart `AsyncMorpheus`). This class manages the connection to the backend and maintains the context of the current `world_id`.
-
-### Initialization
-You can initialize the SDK with custom settings or an existing `world_id`.
-
-```python
-from morpheus_sdk.sdk.morpheus import Morpheus, ModelHttpClientInputs
-
-settings = ModelHttpClientInputs(base_url="http://localhost:8000")
-sdk = Morpheus(settings=settings, world_id="existing-world-id")
-```
-
-## API Reference
-
-### 1. Environment Management (`create`, `delete`, `reset`)
-
-Manage the lifecycle of your simulation world.
-
-**Create a World:**
-```python
-from morpheus_sdk.sdk.morpheus import ModelCreateEnvInputs
-
-output = sdk.create(ModelCreateEnvInputs(
+# Create a new private World
+sdk.create(ModelCreateEnvInputs(
     name="Logistics Sim",
-    layout="Standard Warehouse"
+    layout="perishables-food-manufacturer"
 ))
+
+print(f"Connected to World ID: {sdk.world_id}")
 ```
 
-**Reset World:**
-Resets the current world to its initial state.
-```python
-sdk.reset()
-```
+### Core Operations
 
-**Delete World:**
-Deletes the current world.
-```python
-sdk.delete()
-```
-
-### 2. Action Space (`action_space`)
-
-Discover available actions and retrieve trajectory details.
-
-**Get Service Documentation:**
-```python
-from morpheus_sdk.sdk.morpheus import ModelActionSpaceMeshDocsInputs
-
-docs = sdk.action_space(ModelActionSpaceMeshDocsInputs(
-    service="tms",
-    method="POST"
-))
-```
-
-**Get Trajectory (OD):**
-```python
-from morpheus_sdk.sdk.morpheus import ModelActionSpaceTrajectoryInputs
-
-traj = sdk.action_space(ModelActionSpaceTrajectoryInputs(
-    od_id="trajectory-id"
-))
-```
-
-### 3. Act (`act`)
-
-Execute actions within the simulated environment.
+-   **`act`**: Execute an API call against the simulated world.
+-   **`observe`**: Get the current state (logs, metrics, audit trails).
+-   **`verify`**: Check if specific conditions are met (e.g., "Did ticket #123 get resolved?").
 
 ```python
-from morpheus_sdk.sdk.morpheus import ModelActInputs
+from morpheus_sdk.sdk.morpheus import ModelActInputs, ModelStateInputs
 
-observation = sdk.act(ModelActInputs(
+# 1. Perform an action (e.g., POST /shipments)
+sdk.act(ModelActInputs(
     path="/api/v1/shipments",
     method="POST",
     body={"destination": "New York"}
 ))
+
+# 2. Observe the consequences
+state = sdk.observe(ModelStateInputs(include={"logs": True}))
+print(state.logs)
 ```
 
-### 4. Observe (`observe`)
+---
 
-Retrieve the current state of the world, including audit logs and operational logs.
+## 3. Using with Gymnasium (RL Compatible)
+
+For Reinforcement Learning, we provide a **Gymnasium** wrapper that makes Morpheus look like a standard RL environment.
+
+### Registration & Make
+
+The environment is registered as `Morpheus-v0`.
 
 ```python
-from morpheus_sdk.sdk.morpheus import ModelStateInputs
+import gymnasium as gym
+import morpheus_sdk.gym  # Registers 'Morpheus-v0'
 
-state = sdk.observe(ModelStateInputs(
-    include={"audit_log": True, "logs": True},
-    limit=50
-))
+env = gym.make("Morpheus-v0")
+observation, info = env.reset()
+
+print("Initial Observation Keys:", observation.keys())
 ```
 
-### 5. Verify (`verify`)
+### Action Space (`spaces.Dict`)
+Unlike simple environments with discrete actions (Left/Right), Morpheus is an **API-driven world**. The action space reflects this:
 
-Verify the state of specific entities or tickets.
+-   `path` (Text): The API endpoint to hit (e.g., `/api/v1/user/login`).
+-   `method` (Text): HTTP verb (`GET`, `POST`, `PUT`, etc.).
+-   `body` (Text/Object): The payload. In Gym, this is often handled as a JSON string or dictionary.
 
-**Verify a Ticket:**
 ```python
-from morpheus_sdk.sdk.morpheus import ModelVerifyTicketInputs
-
-result = sdk.verify(ModelVerifyTicketInputs(
-    ticket_id="ticket-123"
-))
+action = {
+    "path": "/world/act",
+    "method": "POST",
+    "body": {"action": "check_inventory"}
+}
+obs, reward, terminated, truncated, info = env.step(action)
 ```
 
-**Verify an Entity:**
+### Observation Space (`spaces.Dict`)
+The observation is a JSON representation of the world state.
+
+-   `world_id` (Text): The ID of the current simulation instance.
+-   `raw_state_json` (Text): A serialized JSON string containing the full state returned by `sdk.observe()`. Use `json.loads()` to parse it.
+
+---
+
+## 4. How & Why This is Different
+
+If you are coming from traditional RL environments (CartPole, Atari, MuJoCo), **Morpheus is fundamentally different**.
+
+### A. Continuous & Persistent World (The "Real-Time" Choice)
+We deliberately chose **not** to implement a "Turn-Based" (frozen time) architecture. 
+
+**Why?** 
+1.  **Sim-to-Real Gap**: Agents trained in frozen-time environments often fail in production because they cannot handle latency or asynchronous state changes.
+2.  **Concurrency**: In a real supply chain, other actors (suppliers, logistics providers) do not pause while you compute your next move.
+3.  **Lead Times**: Actions like "Order Inventory" have multi-day lead times. A turn-based system glosses over the complexity of pipeline management.
+
+**Impact on RL**:
+-   **No Instant Step**: A `step()` triggers an API call, but the *consequence* (e.g., shipment arrival) happens asynchronously in simulated time.
+-   **Robustness**: Your agent must be robust to the world changing state *while* it is computing its next action.
+
+> [!TIP]
+> **Need to Pause?**
+> While the world is designed to be continuous, you **can** pause it for debugging or stepping through logic manually.
+> ```python
+> # Freeze the business logic (trucks stop moving, orders stop processing)
+> env.pause()
+> # ... inspect state ...
+> env.resume()
+> ```
+> Use this sparingly. Training on a paused world defeats the purpose of learning real-time robustness.
+
+### B. "Reset" Reality
+Calling `env.reset()` does **not** instantly "rewind" memory like an emulator.
+-   It effectively **destroys** the old world and **provisions** a brand new isolated container (or database namespace).
+-   This limits the frequency of resets compared to lightweight toy environments.
+
+### C. Reward Signal
+There is **no default reward function**.
+-   In a business sim, "success" is subjective (Profit? Speed? Customer Satisfaction?).
+-   You typically need to wrap `MorpheusEnv` and implement your own reward calculation based on the `raw_state_json` (e.g., `reward = current_capital - previous_capital`).
+
+---
+
+## 5. Hybrid Usage (Advanced)
+
+You can use the Gym interface for the RL loop while accessing the underlying SDK for helper functions or debugging.
+
 ```python
-from morpheus_sdk.sdk.morpheus import ModelVerifyEntityInputs
+import gymnasium as gym
+import morpheus_sdk.gym
 
-result = sdk.verify(ModelVerifyEntityInputs(
-    od_id="flow-1",
-    entity_id="shipment-555",
-    entity_type="shipment"
-))
-```
+env = gym.make("Morpheus-v0")
+env.reset()
 
-### 6. Tasks (`task`)
+# Access the underlying SDK instance
+sdk_client = env.unwrapped.sdk
 
-List or retrieve ITSM tasks assigned to the world.
+# Do standard stuff
+print(f"The underlying world ID is: {sdk_client.world_id}")
 
-```python
-from morpheus_sdk.sdk.morpheus import ModelTaskInputs
-
-# List all tasks
-tasks = sdk.task(ModelTaskInputs())
-
-# Filter tasks
-# (See ModelTaskFilters for advanced filtering)
-```
-
-## Async Support
-
-The SDK provides first-class support for `asyncio` via `AsyncMorpheus`.
-
-```python
-import asyncio
-from morpheus_sdk.sdk.morpheus import AsyncMorpheus, ModelCreateEnvInputs
-
-async def main():
-    sdk = AsyncMorpheus()
-    await sdk.connect() # Optional explicit connection check
-    
-    await sdk.create(ModelCreateEnvInputs(name="Async World"))
-    print(f"World: {sdk.world_id}")
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-## Models & Exports
-
-All necessary classes and models are exported from `morpheus_sdk.sdk.morpheus`.
-
-```python
-from morpheus_sdk.sdk.morpheus import (
-    Morpheus, 
-    AsyncMorpheus,
-    Client,
-    ModelCreateEnvInputs,
-    ModelActInputs,
-    ModelStateInputs,
-    ModelVerifyInputs,
-    ModelTaskInputs,
-    ModelActionSpaceInputs
-)
+# Do RL stuff
+env.step({
+    "path": "/some/api",
+    "method": "GET"
+})
 ```

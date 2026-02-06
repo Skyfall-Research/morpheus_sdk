@@ -3,6 +3,7 @@ from ...client.generated_api_client.client import Client
 from ...client.generated_api_client.api.world import create_world, delete_world, reset_world, list_worlds
 from ...client.generated_api_client.models.create_world_body import CreateWorldBody
 
+
 class World:
     def __init__(self, client: Client):
         self.client = client
@@ -44,6 +45,22 @@ class World:
         else:
              raise Exception(f"Failed to get default world: {response.status_code} {response.content}")
 
+    def pause(self):
+        # Endpoint: PUT /:worldId/od/schedules/pause
+        url = f"/{self.world_id}/od/schedules/pause"
+        response = self.client.get_httpx_client().put(url)
+        if response.status_code != 200:
+             raise Exception(f"Pause failed: {response.text}")
+        return response.json()
+
+    def resume(self):
+        # Endpoint: PUT /:worldId/od/schedules/resume
+        url = f"/{self.world_id}/od/schedules/resume"
+        response = self.client.get_httpx_client().put(url)
+        if response.status_code != 200:
+             raise Exception(f"Resume failed: {response.text}")
+        return response.json()
+
 class AsyncWorld:
     def __init__(self, client: Client):
         self.client = client
@@ -57,6 +74,20 @@ class AsyncWorld:
             return body
         else:
              raise Exception(f"Failed to create world: {response.status_code} {response.content}")
+    
+    async def pause(self):
+        url = f"/{self.world_id}/od/schedules/pause"
+        response = await self.client.get_async_httpx_client().put(url)
+        if response.status_code != 200:
+             raise Exception(f"Pause failed: {response.text}")
+        return response.json()
+
+    async def resume(self):
+        url = f"/{self.world_id}/od/schedules/resume"
+        response = await self.client.get_async_httpx_client().put(url)
+        if response.status_code != 200:
+             raise Exception(f"Resume failed: {response.text}")
+        return response.json()
 
     async def delete(self):
         if not self.world_id:

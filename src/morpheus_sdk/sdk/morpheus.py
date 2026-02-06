@@ -137,6 +137,22 @@ class Morpheus:
 
     def action_space(self, inputs: ModelActionSpaceInputs) -> ModelActionSpaceObservation:
         return execute_action_space_sync(self._action_space_wrapper, inputs)
+    
+    def pause(self) -> ModelEnvOutput:
+        """Pause the simulation world."""
+        # Use existing env_ops logic via wrapper or directly call ops if wrapper has logic
+        # Current design: ops take wrapper. World wrapper has pause() method which calls ops.
+        # But here we stick to the pattern: use ops directly or call wrapper method?
+        # SDK methods here call 'execute_X_sync' passing wrapper.
+        # execute_pause_sync takes wrapper.
+        from .ops.env_ops import execute_pause_sync
+        return execute_pause_sync(self._world_wrapper)
+
+    def resume(self) -> ModelEnvOutput:
+        """Resume the simulation world."""
+        from .ops.env_ops import execute_resume_sync
+        return execute_resume_sync(self._world_wrapper)
+
 
 class AsyncMorpheus:
     def __init__(self, settings: ModelHttpClientInputs = ModelHttpClientInputs(), world_id: Optional[str] = None):
@@ -205,3 +221,14 @@ class AsyncMorpheus:
 
     async def action_space(self, inputs: ModelActionSpaceInputs) -> ModelActionSpaceObservation:
         return await execute_action_space_async(self._action_space_wrapper, inputs)
+
+    async def pause(self) -> ModelEnvOutput:
+        """Pause the simulation world."""
+        from .ops.env_ops import execute_pause_async
+        return await execute_pause_async(self._world_wrapper)
+
+    async def resume(self) -> ModelEnvOutput:
+        """Resume the simulation world."""
+        from .ops.env_ops import execute_resume_async
+        return await execute_resume_async(self._world_wrapper)
+

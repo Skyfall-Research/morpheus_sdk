@@ -5,7 +5,8 @@ class ModelCreateEnvInputs(BaseModel):
     name: str
     description: Optional[str] = None
     layout: Optional[str] = None
-    real_hours_per_sim_day: Optional[int] = 24
+    real_hours_per_sim_day: Optional[float] = None
+
 
 class ModelDeleteEnvInputs(BaseModel):
     world_id: str

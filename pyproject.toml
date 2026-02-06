@@ -17,6 +17,9 @@ dependencies = [
     "httpx>=0.28.1",
     "pydantic>=2.12.5",
     "python-dateutil>=2.9.0.post0",
+    "gymnasium>=0.29.0",
+    "numpy>=1.26.0",
+
 ]
 
 [dependency-groups]
