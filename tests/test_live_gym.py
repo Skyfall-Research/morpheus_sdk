@@ -1,10 +1,11 @@
 import pytest
 import gymnasium as gym
 
-@pytest.mark.integration
+
 import morpheus_sdk.gym  # Registration
 from morpheus_sdk.sdk.morpheus import ModelHttpClientInputs
 
+@pytest.mark.integration
 def test_live_gym_cycle():
     print("Starting Live Gym Cycle Test...")
     

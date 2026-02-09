@@ -4,7 +4,7 @@ import pytest
 import asyncio
 from uuid import uuid4
 
-@pytest.mark.integration
+
 
 from morpheus_sdk.sdk.morpheus import (
     Morpheus, 
@@ -17,6 +17,7 @@ from morpheus_sdk.sdk.morpheus import (
 # Allow overriding base URL for testing against local/dev
 # BASE_URL = os.environ.get("MORPHEUS_API_URL", "http://localhost:8000")
 
+@pytest.mark.integration
 class TestMorpheusSync(unittest.TestCase):
     def setUp(self):
         self.sdk = Morpheus()
@@ -77,6 +78,7 @@ class TestMorpheusSync(unittest.TestCase):
         self.created_world_id = None # Prevent double delete in tearDown
 
 
+@pytest.mark.integration
 class TestMorpheusAsync(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.sdk = AsyncMorpheus()
