@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TYPE_CHECKING, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -9,6 +9,8 @@ from ..types import UNSET, Unset
 T = TypeVar("T", bound="CreateWorldBody")
 
 
+if TYPE_CHECKING:
+    from ..models.chaos_config import ChaosConfig
 @_attrs_define
 class CreateWorldBody:
     """
@@ -36,6 +38,7 @@ class CreateWorldBody:
     api_secret: Union[Unset, str] = UNSET
     mpc_company: Union[Unset, str] = UNSET
     real_hours_per_sim_day: Union[Unset, float] = 2.0
+    chaos: Union[Unset, "ChaosConfig"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -56,6 +59,10 @@ class CreateWorldBody:
         mpc_company = self.mpc_company
 
         real_hours_per_sim_day = self.real_hours_per_sim_day
+
+        chaos: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.chaos, Unset):
+            chaos = self.chaos.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -79,11 +86,15 @@ class CreateWorldBody:
             field_dict["mpcCompany"] = mpc_company
         if real_hours_per_sim_day is not UNSET:
             field_dict["realHoursPerSimDay"] = real_hours_per_sim_day
+        if chaos is not UNSET:
+            field_dict["chaos"] = chaos
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.chaos_config import ChaosConfig
+
         d = dict(src_dict)
         name = d.pop("name")
 
@@ -103,6 +114,13 @@ class CreateWorldBody:
 
         real_hours_per_sim_day = d.pop("realHoursPerSimDay", UNSET)
 
+        _chaos = d.pop("chaos", UNSET)
+        chaos: Union[Unset, ChaosConfig]
+        if isinstance(_chaos, Unset):
+            chaos = UNSET
+        else:
+            chaos = ChaosConfig.from_dict(_chaos)
+
         create_world_body = cls(
             name=name,
             layout=layout,
@@ -113,6 +131,7 @@ class CreateWorldBody:
             api_secret=api_secret,
             mpc_company=mpc_company,
             real_hours_per_sim_day=real_hours_per_sim_day,
+            chaos=chaos,
         )
 
         create_world_body.additional_properties = d

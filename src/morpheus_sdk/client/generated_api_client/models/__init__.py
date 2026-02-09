@@ -93,6 +93,7 @@ from .cancel_wms_replenishment_body import CancelWMSReplenishmentBody
 from .cancel_wms_replenishment_response_200 import CancelWMSReplenishmentResponse200
 from .capability_filter import CapabilityFilter
 from .capability_filter_complexity import CapabilityFilterComplexity
+from .chaos_config import ChaosConfig
 from .chaos_policy import ChaosPolicy
 from .chaos_scenario import ChaosScenario
 from .chaos_scenario_config import ChaosScenarioConfig

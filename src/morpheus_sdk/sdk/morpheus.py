@@ -11,7 +11,7 @@ from ..client.api.tasks import Tasks, AsyncTasks
 from ..client.api.action_space import ActionSpace, AsyncActionSpace
 
 from ..models.model_http_client import ModelHttpClientInputs
-from ..models.model_env import ModelCreateEnvInputs, ModelEnvOutput
+from ..models.model_env import ModelCreateEnvInputs, ModelEnvOutput, ModelChaosConfig
 from ..models.model_act import ModelActInputs, ModelActObservation
 from ..models.model_state import ModelStateInputs, ModelStateOutputs
 from ..models.model_verify import (
@@ -61,6 +61,7 @@ __all__ = [
     "ModelActionSpaceObservation",
     "ModelActionSpaceMeshDocsInputs",
     "ModelActionSpaceTrajectoryInputs",
+    "ModelChaosConfig",
 ]
 
 class Morpheus:

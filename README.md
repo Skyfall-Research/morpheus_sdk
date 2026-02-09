@@ -30,15 +30,22 @@ The standard SDK allows granular control over the Morpheus world via Python obje
 ### Initialization
 
 ```python
-from morpheus_sdk.sdk.morpheus import Morpheus, ModelCreateEnvInputs
+from morpheus_sdk.sdk.morpheus import Morpheus, ModelCreateEnvInputs, ModelChaosConfig
 
 # Initialize with default settings (localhost:8000 or defined via env vars)
 sdk = Morpheus()
 
+# Configure Chaos (Optional)
+chaos_config = ModelChaosConfig(
+    process_chaos_enabled=True, # Enable OD-level random deviations
+    infra_chaos_enabled=True    # Enable infrastructure faults (network/db)
+)
+
 # Create a new private World
 sdk.create(ModelCreateEnvInputs(
     name="Logistics Sim",
-    layout="perishables-food-manufacturer"
+    layout="perishables-food-manufacturer",
+    chaos=chaos_config
 ))
 
 print(f"Connected to World ID: {sdk.world_id}")

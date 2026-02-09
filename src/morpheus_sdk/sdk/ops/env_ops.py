@@ -2,6 +2,7 @@ import logging
 from typing import Optional
 
 from ...client.generated_api_client.models.create_world_body import CreateWorldBody
+from ...client.generated_api_client.models.chaos_config import ChaosConfig
 from ...models.model_env import ModelCreateEnvInputs, ModelEnvOutput
 from ...client.api.world import World, AsyncWorld
 
@@ -23,6 +24,11 @@ def execute_create_sync(wrapper: World, inputs: ModelCreateEnvInputs) -> ModelEn
             payload["description"] = inputs.description
         if inputs.real_hours_per_sim_day is not None:
              payload["realHoursPerSimDay"] = inputs.real_hours_per_sim_day
+        if inputs.chaos:
+             payload["chaos"] = {
+                 "processChaosEnabled": inputs.chaos.process_chaos_enabled,
+                 "infraChaosEnabled": inputs.chaos.infra_chaos_enabled
+             }
 
         # Use relative URL as base_url is set in httpx client
         response = client.get_httpx_client().post("/world", json=payload)
@@ -56,7 +62,11 @@ async def execute_create_async(wrapper: AsyncWorld, inputs: ModelCreateEnvInputs
             name=inputs.name,
             description=inputs.description,
             layout=inputs.layout,
-            real_hours_per_sim_day=inputs.real_hours_per_sim_day
+            real_hours_per_sim_day=inputs.real_hours_per_sim_day,
+            chaos=ChaosConfig(
+                process_chaos_enabled=inputs.chaos.process_chaos_enabled,
+                infra_chaos_enabled=inputs.chaos.infra_chaos_enabled
+            ) if inputs.chaos else UNSET
         )
         created_body = await wrapper.create(body)
         return ModelEnvOutput(
