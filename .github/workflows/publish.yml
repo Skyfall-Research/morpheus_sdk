@@ -27,11 +27,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        uses: astral-sh/setup-uv@v5
       - name: Install dependencies
-        run: uv sync --all-extras --dev
+        run: uv sync --all-extras --dev --locked
       - name: Run tests
-        run: uv run pytest
+        run: uv run python -m pytest -m "not integration"
 
   version-and-release:
     name: Bump Version, Tag, and Release
@@ -45,15 +45,15 @@ jobs:
           fetch-depth: 0 # Essential for tagging and pushing
       
       - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        uses: astral-sh/setup-uv@v5
         
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
           
-      - name: Install hatch
-        run: pip install hatch
+      - name: Install dependencies
+        run: uv sync --all-extras --dev --locked
         
       - name: Configure Git
         run: |
@@ -71,8 +71,8 @@ jobs:
       - name: Commit and Push changes
         run: |
           git add src/morpheus_sdk/__about__.py
-          git commit -m "chore: bump version to ${{ env.NEW_VERSION }}"
-          git tag ${{ env.NEW_VERSION }}
+          git commit -m "chore: bump version to ${{ steps.bump.outputs.version }}"
+          git tag ${{ steps.bump.outputs.version }}
           git push origin main --tags
           
       - name: Build package
@@ -81,7 +81,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.NEW_VERSION }}
+          tag_name: ${{ steps.bump.outputs.version }}
           files: |
             dist/*.tar.gz
             dist/*.whl
