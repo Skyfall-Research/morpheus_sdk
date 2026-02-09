@@ -32,4 +32,4 @@ jobs:
     
     - name: Run tests (Unit only)
       # Skip integration tests as backend is not available in CI
-      run: uv run pytest --ignore=tests/
+      run: uv run pytest -m "not integration"

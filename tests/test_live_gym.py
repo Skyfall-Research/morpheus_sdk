@@ -1,4 +1,7 @@
+import pytest
 import gymnasium as gym
+
+@pytest.mark.integration
 import morpheus_sdk.gym  # Registration
 from morpheus_sdk.sdk.morpheus import ModelHttpClientInputs
 

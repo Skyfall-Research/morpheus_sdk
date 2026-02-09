@@ -1,6 +1,9 @@
 import unittest
 import os
+import pytest
 from uuid import uuid4
+
+@pytest.mark.integration
 
 from morpheus_sdk.sdk.morpheus import (
     Morpheus, 

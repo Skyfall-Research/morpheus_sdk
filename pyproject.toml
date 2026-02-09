@@ -38,3 +38,9 @@ path = "src/morpheus_sdk/__about__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/morpheus_sdk"]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+    "integration: marks tests as integration tests (requiring backend)",
+]
